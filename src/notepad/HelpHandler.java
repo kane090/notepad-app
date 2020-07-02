@@ -1,0 +1,19 @@
+package notepad;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+public class HelpHandler implements EventHandler<ActionEvent> {
+	private PopHelp help;
+
+	public HelpHandler(PopHelp popHelp) {
+		this.help=popHelp;
+	}
+
+	@Override
+	public void handle(ActionEvent arg0) {
+		help.show();
+
+	}
+
+}
