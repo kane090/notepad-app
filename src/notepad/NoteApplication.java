@@ -100,12 +100,22 @@ public class NoteApplication extends Application {
 		
 	
 		
+		
+		
+		
+		
+		
+		
 		Scene scene = new Scene(box,750,500); 
 		
 	
 		
 		stage.setScene(scene);
 		
+		// add the logo 
+				Image a = new Image((new File("assets" + File.separator + "logoofNotepad.png")).toURI().toString());
+				ImageView v= new ImageView(a);
+				stage.getIcons().add(a);
 		
 		//display the notepad to user
 		
