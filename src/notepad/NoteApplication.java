@@ -3,6 +3,9 @@ import java.io.File;
 
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -16,8 +19,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 public class NoteApplication extends Application {
+	private boolean isBold=false;
 
 	
 	
@@ -32,15 +37,15 @@ public class NoteApplication extends Application {
 		MenuBar menuBar = new MenuBar();
 		// menu-> menu item 
 		Menu menu = new Menu("File");
+		Menu menu2 = new Menu("Edit");
 		Menu menu1 = new Menu("Text Options");
 		Menu menu3 = new Menu("Options");
-		Menu menu2 = new Menu("Help");
 		
 		//add Menus to Menu bar
 		menuBar.getMenus().add(menu);
+		menuBar.getMenus().add(menu2);
 		menuBar.getMenus().add(menu1);
 		menuBar.getMenus().add(menu3);
-		menuBar.getMenus().add(menu2);
 
 		
 		// add options to File menu
@@ -57,6 +62,20 @@ public class NoteApplication extends Application {
 		menu.getItems().add(menuItem4);
 		menu.getItems().add(menuItem5);
 		menu.getItems().add(menuItem6);
+		
+		//add options to edit menu
+		MenuItem menuItema = new MenuItem("Cut");
+		MenuItem menuItemb = new MenuItem("Copy");
+		MenuItem menuItemc = new MenuItem("Paste");
+		MenuItem menuItemd = new MenuItem("Select All");
+		
+		menu2.getItems().add(menuItema);
+		menu2.getItems().add(menuItemb);
+		menu2.getItems().add(menuItemc);
+		menu2.getItems().add(menuItemd);
+		
+	
+		
 		
 		// add options to txt options
 		MenuItem menuI = new MenuItem("Bold");
@@ -76,15 +95,15 @@ public class NoteApplication extends Application {
 		// add options to the options 
 		MenuItem color = new MenuItem("Colour Scheme");
 		MenuItem cursor = new MenuItem("Change Cursor");
-		
+		MenuItem help = new MenuItem("Help");
+
+		menu3.getItems().add(help);
 		menu3.getItems().add(color);
 		menu3.getItems().add(cursor);
 		
 		
 		//set up the help pop up window
-		MenuItem help= new MenuItem("Help");
-		menu2.getItems().add(help);
-		menu2.setOnAction(new HelpHandler(new PopHelp()));
+		help.setOnAction(new HelpHandler(new PopHelp()));
 		
 
 		
@@ -95,16 +114,75 @@ public class NoteApplication extends Application {
 		
 		//add the text thing to the vbox
 		TextArea textArea = new TextArea();
-		textArea.setPrefSize(500, 500);
+		textArea.setPrefSize(500,500);
 		box.getChildren().add(textArea);
 		
+		//italic button 
+		textArea.setStyle("-fx-background-color: pink");
+		//bold button
+		menuI.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println(isBold);
+				if(!isBold) {
+			   textArea.setStyle("-fx-font-weight:bold");
+			     isBold=true;
+				}
+				else {
+					
+					   textArea.setStyle("-fx-font-weight:normal");
+					 isBold=false;
+
+					
+				}
+			}
+		});
 	
+		//exit button
+		menuItem6.setOnAction(e -> Platform.exit());
+		
+		//new button 
+		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.setText(null);
+			}
+		});
 		
 		
 		
+		//cut button 
+		menuItema.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.cut();
+			}
+		});
 		
+		//copy button
+		menuItemb.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.copy();
+			}
+		});
 		
+		//paste button
+		menuItemc.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.paste();
+			}
+		});
 		
+		//select all button 
+		menuItemd.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.selectAll();
+			   
+			}
+		});
 		
 		Scene scene = new Scene(box,750,500); 
 		
