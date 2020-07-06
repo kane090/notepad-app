@@ -150,6 +150,24 @@ public class NoteApplication extends Application {
 		});
 		
 		
+		//redo button
+		menuItem5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.redo();
+			}
+		});
+		
+		
+		
+		//undo button-4
+		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			   textArea.undo();
+			}
+		});
+		
 		
 		//cut button 
 		menuItema.setOnAction(new EventHandler<ActionEvent>() {
