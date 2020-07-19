@@ -7,13 +7,11 @@ public class HelpHandler implements EventHandler<ActionEvent> {
 	private PopHelp help;
 
 	public HelpHandler(PopHelp popHelp) {
-		this.help=popHelp;
+		this.help = popHelp;
 	}
 
-	@Override
-	public void handle(ActionEvent arg0) {
+	public void handle(ActionEvent event) {
 		help.show();
-
 	}
 
 }

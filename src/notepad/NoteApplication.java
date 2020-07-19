@@ -1,47 +1,44 @@
 package notepad;
 import java.io.File;
 
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.IndexRange;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-public class NoteApplication extends Application {
-	private boolean isBold=false;
 
-	
-	
+public class NoteApplication extends Application {
+	private boolean isBold = false;
+	private boolean isItalic = false;
+	private boolean isDark = false;
+
+
 	public void start(Stage stage) throws Exception {
-		//name and logo set up of notepad
+		
+		// name and logo set up of notepad
 		stage.setTitle("Notepad");
-		//logo-> DO LATER**********************
-		//setting up the main scene 
+		
+		// setting up the main scene
 		VBox box = new VBox();
 		
-		//menu creation
+		// menu creation
 		MenuBar menuBar = new MenuBar();
+		
 		// menu-> menu item 
 		Menu menu = new Menu("File");
 		Menu menu2 = new Menu("Edit");
 		Menu menu1 = new Menu("Text Options");
 		Menu menu3 = new Menu("Options");
 		
-		//add Menus to Menu bar
+		// add Menus to Menu bar
 		menuBar.getMenus().add(menu);
 		menuBar.getMenus().add(menu2);
 		menuBar.getMenus().add(menu1);
@@ -63,7 +60,7 @@ public class NoteApplication extends Application {
 		menu.getItems().add(menuItem5);
 		menu.getItems().add(menuItem6);
 		
-		//add options to edit menu
+		// add options to edit menu
 		MenuItem menuItema = new MenuItem("Cut");
 		MenuItem menuItemb = new MenuItem("Copy");
 		MenuItem menuItemc = new MenuItem("Paste");
@@ -73,10 +70,7 @@ public class NoteApplication extends Application {
 		menu2.getItems().add(menuItemb);
 		menu2.getItems().add(menuItemc);
 		menu2.getItems().add(menuItemd);
-		
-	
-		
-		
+			
 		// add options to txt options
 		MenuItem menuI = new MenuItem("Bold");
 		MenuItem menuI1 = new MenuItem("Italics");
@@ -93,47 +87,59 @@ public class NoteApplication extends Application {
 		menu1.getItems().add(menuI5);
 		
 		// add options to the options 
-		MenuItem color = new MenuItem("Colour Scheme");
+		Menu color = new Menu("Colour Scheme");
 		MenuItem cursor = new MenuItem("Change Cursor");
 		MenuItem help = new MenuItem("Help");
+		
+		// color scheme options
+		MenuItem dark = new MenuItem("Dark Mode");
+		MenuItem light = new MenuItem("Light Mode");
+		color.getItems().add(dark);
+		color.getItems().add(light);
 
 		menu3.getItems().add(help);
 		menu3.getItems().add(color);
 		menu3.getItems().add(cursor);
 		
-		
 		//set up the help pop up window
 		help.setOnAction(new HelpHandler(new PopHelp()));
 		
-
-		
-		
-        //add the menubar to the GUI 
-		
+        //add the menubar to the GUI
 		box.getChildren().add(menuBar);
 		
-		//add the text thing to the vbox
+		//add the text area to the vbox
 		TextArea textArea = new TextArea();
-		textArea.setPrefSize(500,500);
+		textArea.setPrefSize(900,900);
 		box.getChildren().add(textArea);
 		
 		//italic button 
-		textArea.setStyle("-fx-background-color: pink");
-		//bold button
-		menuI.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
+		menuI1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println(isBold);
-				if(!isBold) {
-			   textArea.setStyle("-fx-font-weight:bold");
-			     isBold=true;
+				System.out.println(isItalic);
+				if (!isItalic) {
+					textArea.setStyle("-fx-font-style:italic");
+					isItalic = true;
 				}
 				else {
-					
-					   textArea.setStyle("-fx-font-weight:normal");
-					 isBold=false;
-
-					
+					textArea.setStyle("-fx-font-style:normal");
+				}
+			}
+			
+		});
+		
+		//bold button
+		menuI.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println(isBold);
+//				System.out.println(textArea.getSelectedText());
+//				IndexRange selection = textArea.getSelection();				
+				if(!isBold) {	
+					textArea.setStyle("-fx-font-weight:bold");
+					isBold=true;
+				}
+				else {
+					textArea.setStyle("-fx-font-weight:normal");
+					isBold=false;
 				}
 			}
 		});
@@ -143,7 +149,6 @@ public class NoteApplication extends Application {
 		
 		//new button 
 		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.setText(null);
 			}
@@ -152,7 +157,6 @@ public class NoteApplication extends Application {
 		
 		//redo button
 		menuItem5.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.redo();
 			}
@@ -162,7 +166,6 @@ public class NoteApplication extends Application {
 		
 		//undo button-4
 		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.undo();
 			}
@@ -171,7 +174,6 @@ public class NoteApplication extends Application {
 		
 		//cut button 
 		menuItema.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.cut();
 			}
@@ -179,7 +181,6 @@ public class NoteApplication extends Application {
 		
 		//copy button
 		menuItemb.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.copy();
 			}
@@ -187,7 +188,6 @@ public class NoteApplication extends Application {
 		
 		//paste button
 		menuItemc.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.paste();
 			}
@@ -195,41 +195,50 @@ public class NoteApplication extends Application {
 		
 		//select all button 
 		menuItemd.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
 			public void handle(ActionEvent event) {
 			   textArea.selectAll();
 			   
 			}
 		});
 		
-		Scene scene = new Scene(box,750,500); 
+		Scene scene = new Scene(box,750,500);
 		
-	
+		//setting up color scheme buttons
+		dark.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isDark) {
+					textArea.setStyle("-fx-text-fill:white");
+					scene.getRoot().setStyle("-fx-base:black");
+					isDark = true;
+				}
+			}
+			
+		});
 		
+		light.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (isDark) {
+					textArea.setStyle("-fx-text-fill:black");
+					scene.getRoot().setStyle("-fx-base:white");
+					isDark = false;
+				}
+			}
+			
+		});
+		
+		// setting the stage
 		stage.setScene(scene);
 		
-		// add the logo 
-				Image a = new Image((new File("assets" + File.separator + "logoofNotepad.png")).toURI().toString());
-				ImageView v= new ImageView(a);
-				stage.getIcons().add(a);
+		// adding the logo 
+		Image a = new Image((new File("assets" + File.separator + "logoofNotepad.png")).toURI().toString());
+		stage.getIcons().add(a);
 		
 		//display the notepad to user
-		
 		stage.show();
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-		
 	}
 
-	
+	public static void main(String[] args) {
+		launch(args);
+	}
+
 }
