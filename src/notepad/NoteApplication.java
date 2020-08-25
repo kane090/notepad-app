@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.IndexRange;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -16,8 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class NoteApplication extends Application {
-	private boolean isBold = false;
-	private boolean isItalic = false;
 	private boolean isDark = false;
 
 
@@ -72,16 +69,10 @@ public class NoteApplication extends Application {
 		menu2.getItems().add(menuItemd);
 			
 		// add options to txt options
-		MenuItem menuI = new MenuItem("Bold");
-		MenuItem menuI1 = new MenuItem("Italics");
-		MenuItem menuI2 = new MenuItem("Underline");
 		MenuItem menuI3 = new MenuItem("Font");
 		MenuItem menuI4 = new MenuItem("Size");
 		MenuItem menuI5 = new MenuItem("Colour");
 		
-		menu1.getItems().add(menuI);
-		menu1.getItems().add(menuI1);
-		menu1.getItems().add(menuI2);
 		menu1.getItems().add(menuI3);
 		menu1.getItems().add(menuI4);
 		menu1.getItems().add(menuI5);
@@ -111,38 +102,6 @@ public class NoteApplication extends Application {
 		TextArea textArea = new TextArea();
 		textArea.setPrefSize(900,900);
 		box.getChildren().add(textArea);
-		
-		//italic button 
-		menuI1.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				System.out.println(isItalic);
-				if (!isItalic) {
-					textArea.setStyle("-fx-font-style:italic");
-					isItalic = true;
-				}
-				else {
-					textArea.setStyle("-fx-font-style:normal");
-				}
-			}
-			
-		});
-		
-		//bold button
-		menuI.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				System.out.println(isBold);
-//				System.out.println(textArea.getSelectedText());
-//				IndexRange selection = textArea.getSelection();				
-				if(!isBold) {	
-					textArea.setStyle("-fx-font-weight:bold");
-					isBold=true;
-				}
-				else {
-					textArea.setStyle("-fx-font-weight:normal");
-					isBold=false;
-				}
-			}
-		});
 	
 		//exit button
 		menuItem6.setOnAction(e -> Platform.exit());
