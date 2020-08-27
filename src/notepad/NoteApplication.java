@@ -16,6 +16,13 @@ import javafx.stage.Stage;
 
 public class NoteApplication extends Application {
 	private boolean isDark = false;
+	private boolean isLight = false;
+	private boolean isPastelPink = false;
+	private boolean isPastelBlue = false;
+	private boolean isPastelGreen = false;
+	private boolean isRed = false;
+	private boolean isBlue = false;
+	private boolean isGreen = false;
 
 
 	public void start(Stage stage) throws Exception {
@@ -85,8 +92,20 @@ public class NoteApplication extends Application {
 		// color scheme options
 		MenuItem dark = new MenuItem("Dark Mode");
 		MenuItem light = new MenuItem("Light Mode");
+		MenuItem pastelP = new MenuItem("Pastel Pink Mode");
+		MenuItem pastelB = new MenuItem("Pastel Blue Mode");
+		MenuItem pastelG = new MenuItem("Pastel Green Mode");
+		MenuItem green = new MenuItem("Green Mode");
+		MenuItem blue = new MenuItem("Blue Mode");
+		MenuItem red = new MenuItem("Red Mode");
 		color.getItems().add(dark);
 		color.getItems().add(light);
+		color.getItems().add(pastelP);
+		color.getItems().add(pastelB);
+		color.getItems().add(pastelG);
+		color.getItems().add(green);
+		color.getItems().add(blue);
+		color.getItems().add(red);
 
 		menu3.getItems().add(help);
 		menu3.getItems().add(color);
@@ -163,12 +182,128 @@ public class NoteApplication extends Application {
 		Scene scene = new Scene(box,750,500);
 		
 		//setting up color scheme buttons
+		
+		//primary colors 
+		red.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isBlue) {
+					textArea.setStyle("-fx-text-fill:darkred");
+					scene.getRoot().setStyle("-fx-base:red");
+					isPastelPink = true;
+					isPastelBlue = false;
+					isPastelGreen= false;
+					isDark=false;
+					isLight=false;
+					isGreen=false;
+					isBlue=false;
+					isRed=true;
+				}
+			}
+			
+		});
+		blue.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isBlue) {
+					textArea.setStyle("-fx-text-fill:darkblue");
+					scene.getRoot().setStyle("-fx-base:blue");
+					isPastelPink = true;
+					isPastelBlue = false;
+					isPastelGreen= false;
+					isDark=false;
+					isLight=false;
+					isGreen=false;
+					isBlue=true;
+					isRed=false;
+				}
+			}
+			
+		});
+		green.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isGreen) {
+					textArea.setStyle("-fx-text-fill:darkgreen");
+					scene.getRoot().setStyle("-fx-base:green");
+					isPastelPink = true;
+					isPastelBlue = false;
+					isPastelGreen= false;
+					isDark=false;
+					isLight=false;
+					isGreen=true;
+					isBlue=false;
+					isRed=false;
+				}
+			}
+			
+		});
+		
+		
+		
+		//pastel modes
+		pastelP.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isPastelPink) {
+					textArea.setStyle("-fx-text-fill:hotpink");
+					scene.getRoot().setStyle("-fx-base:lightpink");
+					isPastelPink = true;
+					isPastelBlue = false;
+					isPastelGreen= false;
+					isDark=false;
+					isLight=false;
+					isGreen=false;
+					isBlue=false;
+					isRed=false;
+				}
+			}
+			
+		});
+		pastelB.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isPastelBlue) {
+					textArea.setStyle("-fx-text-fill:steelblue");
+					scene.getRoot().setStyle("-fx-base:lightblue");
+					isPastelPink = false;
+					isPastelBlue = true;
+					isPastelGreen= false;
+					isDark=false;
+					isLight=false;
+					isGreen=false;
+					isBlue=false;
+					isRed=false;
+				}
+			}
+			
+		});
+		pastelG.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (!isPastelGreen) {
+					textArea.setStyle("-fx-text-fill:green");
+					scene.getRoot().setStyle("-fx-base:lightgreen");
+					isPastelPink = false;
+					isPastelBlue = false;
+					isPastelGreen= true;
+					isDark=false;
+					isLight=false;
+					isGreen=false;
+					isBlue=false;
+					isRed=false;
+				}
+			}
+			
+		});
+		
+		
+		//dark + light modes
 		dark.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isDark) {
 					textArea.setStyle("-fx-text-fill:white");
 					scene.getRoot().setStyle("-fx-base:black");
 					isDark = true;
+					isLight=false;
+					isPastelPink = false;
+					isGreen=false;
+					isBlue=false;
+					isRed=false;
 				}
 			}
 			
@@ -176,10 +311,16 @@ public class NoteApplication extends Application {
 		
 		light.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (isDark) {
+				if (!isLight) {
 					textArea.setStyle("-fx-text-fill:black");
 					scene.getRoot().setStyle("-fx-base:white");
 					isDark = false;
+					isPastelPink=false;
+					isLight=true;
+					isGreen=false;
+					isBlue=false;
+					isRed=false;
+					
 				}
 			}
 			
