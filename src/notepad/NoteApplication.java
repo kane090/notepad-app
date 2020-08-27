@@ -1,5 +1,9 @@
 package notepad;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -12,6 +16,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class NoteApplication extends Application {
@@ -76,7 +81,7 @@ public class NoteApplication extends Application {
 		menu2.getItems().add(menuItemd);
 			
 		// add options to txt options
-		MenuItem menuI3 = new MenuItem("Font");
+		Menu menuI3 = new Menu("Font");
 		MenuItem menuI4 = new MenuItem("Size");
 		MenuItem menuI5 = new MenuItem("Colour");
 		
@@ -111,6 +116,34 @@ public class NoteApplication extends Application {
 		menu3.getItems().add(color);
 		menu3.getItems().add(cursor);
 		
+		// font options
+		MenuItem agencyfb = new MenuItem("Agency FB");
+		MenuItem arial = new MenuItem("Arial");
+		MenuItem bellmt = new MenuItem("Bell MT");
+		MenuItem bookantiqua = new MenuItem("Book Antiqua");
+		MenuItem comicsansms = new MenuItem("Comic Sans MS");
+		MenuItem franklingothicbook = new MenuItem("Franklin Gothic Book");
+		MenuItem hightowertext = new MenuItem("High Tower Text");
+		MenuItem gillsansmt = new MenuItem("Gill Sans MT");
+		MenuItem papyrus = new MenuItem("Papyrus");
+		MenuItem tahoma = new MenuItem("Tahoma");
+		MenuItem verdana = new MenuItem("Verdana");
+		MenuItem mvboli = new MenuItem("MV Boli");
+		MenuItem palatinolinotype = new MenuItem("Palatino Linotype");
+		menuI3.getItems().add(agencyfb);
+		menuI3.getItems().add(arial);
+		menuI3.getItems().add(bellmt);
+		menuI3.getItems().add(bookantiqua);
+		menuI3.getItems().add(comicsansms);
+		menuI3.getItems().add(franklingothicbook);
+		menuI3.getItems().add(hightowertext);
+		menuI3.getItems().add(gillsansmt);
+		menuI3.getItems().add(papyrus);
+		menuI3.getItems().add(tahoma);
+		menuI3.getItems().add(verdana);
+		menuI3.getItems().add(mvboli);
+		menuI3.getItems().add(palatinolinotype);
+		
 		//set up the help pop up window
 		help.setOnAction(new HelpHandler(new PopHelp()));
 		
@@ -131,6 +164,46 @@ public class NoteApplication extends Application {
 			   textArea.setText(null);
 			}
 		});
+		
+		//open button
+		menuItem2.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				FileChooser fc = new FileChooser();
+				File file = fc.showOpenDialog(stage);
+				
+				if (file != null) {
+					System.out.println("Opening: " + file.getName() + "." + "\n");
+					BufferedReader bufferedReader = null;
+					try {
+						bufferedReader = new BufferedReader(new FileReader(file));
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		//save button
+		menuItem3.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				FileChooser fc = new FileChooser();
+				File file = fc.showSaveDialog(stage);
+
+				if (file != null) {
+					System.out.println("Saving: " + file.getName() + "." + "\n");
+					PrintWriter writer = null;
+					Saver save = null;
+					try {
+						writer = new PrintWriter(file);
+						save = new Saver();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					save.save(writer, textArea.getFont().getFamily(), textArea.getFont().getSize(), textArea.getStyle(), textArea.getText());
+				}
+			}
+		});
+		
 		
 		
 		//redo button
