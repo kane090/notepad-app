@@ -186,10 +186,10 @@ public class NoteApplication extends Application {
 		//primary colors 
 		red.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (!isBlue) {
+				if (!isRed) {
 					textArea.setStyle("-fx-text-fill:darkred");
 					scene.getRoot().setStyle("-fx-base:red");
-					isPastelPink = true;
+					isPastelPink = false;
 					isPastelBlue = false;
 					isPastelGreen= false;
 					isDark=false;
@@ -206,7 +206,7 @@ public class NoteApplication extends Application {
 				if (!isBlue) {
 					textArea.setStyle("-fx-text-fill:darkblue");
 					scene.getRoot().setStyle("-fx-base:blue");
-					isPastelPink = true;
+					isPastelPink = false;
 					isPastelBlue = false;
 					isPastelGreen= false;
 					isDark=false;
@@ -223,7 +223,7 @@ public class NoteApplication extends Application {
 				if (!isGreen) {
 					textArea.setStyle("-fx-text-fill:darkgreen");
 					scene.getRoot().setStyle("-fx-base:green");
-					isPastelPink = true;
+					isPastelPink = false;
 					isPastelBlue = false;
 					isPastelGreen= false;
 					isDark=false;
