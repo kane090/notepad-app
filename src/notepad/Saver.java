@@ -8,7 +8,7 @@ public class Saver {
 		writer.println("\tFont: " + font);
 		writer.println("\tSize: " + size);
 		writer.println("\tColor: " + color);
-		writer.println("\tText: ");
+		writer.println("\tText:");
 		writer.println(text);
 		writer.println("End");
 		writer.close();

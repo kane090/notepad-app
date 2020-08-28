@@ -16,6 +16,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -249,6 +250,15 @@ public class NoteApplication extends Application {
 			public void handle(ActionEvent event) {
 			   textArea.selectAll();
 			   
+			}
+		});
+		
+		// font buttons
+		agencyfb.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println(Font.getFamilies());
+//				Font font = new Font("Agency FB", 12);
+//				textArea.setFont(font);
 			}
 		});
 		
