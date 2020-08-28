@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -16,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -91,10 +93,24 @@ public class NoteApplication extends Application {
 		
 		// add options to the options 
 		Menu color = new Menu("Colour Scheme");
-		MenuItem cursor = new MenuItem("Change Cursor");
+		Menu cursor = new Menu("Change Cursor");
 		MenuItem help = new MenuItem("Help");
 		
-		// color scheme options
+		//Cursor Options
+		MenuItem cursor1 = new MenuItem("EXID Lightstick");
+		MenuItem cursor2 = new MenuItem("Ice Cream");
+		MenuItem cursor3 = new MenuItem("Dark Mouse");
+		MenuItem cursor4 = new MenuItem("Light Mouse");
+		MenuItem cursor5 = new MenuItem("Batman Logo");
+		
+		cursor.getItems().add(cursor1);
+		cursor.getItems().add(cursor2);
+		cursor.getItems().add(cursor3);
+		cursor.getItems().add(cursor4);
+		cursor.getItems().add(cursor5);
+		
+		
+		// color scheme options 
 		MenuItem dark = new MenuItem("Dark Mode");
 		MenuItem light = new MenuItem("Light Mode");
 		MenuItem pastelP = new MenuItem("Pastel Pink Mode");
@@ -259,6 +275,8 @@ public class NoteApplication extends Application {
 		//primary colors 
 		red.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				//System.out.println(Font.getFamilies());
+
 				if (!isRed) {
 					textArea.setStyle("-fx-text-fill:darkred");
 					scene.getRoot().setStyle("-fx-base:red");
@@ -395,6 +413,42 @@ public class NoteApplication extends Application {
 					isRed=false;
 					
 				}
+			}
+			
+		});
+		//add the icons 
+		cursor1.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Image image = new Image((new File("assets" + File.separator + "free.png")).toURI().toString()); //pass in the image path
+				scene.setCursor(new ImageCursor(image)); 
+			}
+			
+		});
+		cursor2.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Image image1 = new Image((new File("assets" + File.separator + "ice.png")).toURI().toString()); //pass in the image path
+				scene.setCursor(new ImageCursor(image1));
+			}
+			
+		});
+		cursor3.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Image image2 = new Image((new File("assets" + File.separator + "today.png")).toURI().toString()); //pass in the image path
+				scene.setCursor(new ImageCursor(image2));
+			}
+			
+		});
+		cursor4.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Image image3 = new Image((new File("assets" + File.separator + "last.png")).toURI().toString()); //pass in the image path
+				scene.setCursor(new ImageCursor(image3));
+			}
+			
+		});
+		cursor5.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Image image4 = new Image((new File("assets" + File.separator + "prev.png")).toURI().toString()); //pass in the image path
+				scene.setCursor(new ImageCursor(image4));
 			}
 			
 		});
