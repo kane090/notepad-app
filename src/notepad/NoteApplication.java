@@ -216,7 +216,7 @@ public class NoteApplication extends Application {
 		
 		
 		
-		//undo button-4
+		//undo button
 		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 			   textArea.undo();
@@ -256,9 +256,80 @@ public class NoteApplication extends Application {
 		// font buttons
 		agencyfb.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println(Font.getFamilies());
-//				Font font = new Font("Agency FB", 12);
-//				textArea.setFont(font);
+				Font font = new Font("Agency FB", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		arial.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Arial", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		bellmt.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Bell MT", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		bookantiqua.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Book Antiqua", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		comicsansms.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Comic Sans MS", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		franklingothicbook.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Franklin Gothic Book", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		hightowertext.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("High Tower Text", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		gillsansmt.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Gill Sans MT", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		papyrus.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Papyrus", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		tahoma.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Tahoma", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		verdana.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Verdana", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		mvboli.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("MV Boli", textArea.getFont().getSize());
+				textArea.setFont(font);
+			}
+		});
+		palatinolinotype.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("Palatino Linotype", textArea.getFont().getSize());
+				textArea.setFont(font);
 			}
 		});
 		
