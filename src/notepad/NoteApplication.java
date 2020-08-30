@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
+import ObserverObservable.Observable;
+import ObserverObservable.Observer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -16,12 +18,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class NoteApplication extends Application {
+public class NoteApplication extends Application implements Observer {
 	private boolean isDark = false;
 	private boolean isLight = false;
 	private boolean isPastelPink = false;
@@ -30,12 +33,13 @@ public class NoteApplication extends Application {
 	private boolean isRed = false;
 	private boolean isBlue = false;
 	private boolean isGreen = false;
+	public static TextArea textArea= new TextArea();
 
 
 	public void start(Stage stage) throws Exception {
 		
 		// name and logo set up of notepad
-		stage.setTitle("Notepad");
+		stage.setTitle("#Note");
 		
 		// setting up the main scene
 		VBox box = new VBox();
@@ -85,16 +89,128 @@ public class NoteApplication extends Application {
 		// add options to txt options
 		Menu menuI3 = new Menu("Font");
 		MenuItem menuI4 = new MenuItem("Size");
-		MenuItem menuI5 = new MenuItem("Colour");
+		Menu menuI5 = new Menu("Colour");
 		
 		menu1.getItems().add(menuI3);
 		menu1.getItems().add(menuI4);
 		menu1.getItems().add(menuI5);
+	
 		
 		// add options to the options 
 		Menu color = new Menu("Colour Scheme");
 		Menu cursor = new Menu("Change Cursor");
 		MenuItem help = new MenuItem("Help");
+		
+		//text color options 
+		MenuItem White= new MenuItem("White");
+		MenuItem Black= new MenuItem("Black");
+		MenuItem DarkRed= new MenuItem("Dark Red");
+		MenuItem DarkBlue= new MenuItem("Dark Blue");
+		MenuItem DarkGreen= new MenuItem("Dark Green");
+		MenuItem HotPink= new MenuItem("Hot Pink");
+		MenuItem Pink= new MenuItem("Pink");
+		MenuItem Purple= new MenuItem("Purple");
+		MenuItem SteelBlue= new MenuItem("Steel Blue");
+		MenuItem Gold= new MenuItem("Gold");
+		MenuItem Silver= new MenuItem("Silver");
+		MenuItem Red= new MenuItem("Red");
+		MenuItem Blue= new MenuItem("Blue");
+		MenuItem Green= new MenuItem("Green");
+		MenuItem Yellow= new MenuItem("Yellow");
+		MenuItem Orange= new MenuItem("Orange");
+		MenuItem Brown= new MenuItem("Brown");
+		MenuItem Grey= new MenuItem("Grey");
+		
+		menuI5.getItems().addAll(White,Black,DarkRed,DarkBlue,DarkGreen,HotPink,Pink,Purple, SteelBlue,Gold,Silver,Red,Blue,Green,Yellow,Orange,Brown,Grey);
+		
+		//adding the color spoilers
+		//DarkBlue
+		ImageView DB =new ImageView (new Image((new File("assets" + File.separator + "darkblue.png")).toURI().toString()));
+		DB.setFitHeight(10);
+		DB.setFitWidth(10);
+		DarkBlue.setGraphic(DB);
+		//Black
+		ImageView black =new ImageView (new Image((new File("assets" + File.separator + "black.png")).toURI().toString()));
+		black.setFitHeight(10);
+		black.setFitWidth(10);
+		Black.setGraphic(black);
+		//DarkRed
+		ImageView DR =new ImageView (new Image((new File("assets" + File.separator + "darkred.png")).toURI().toString()));
+		DR.setFitHeight(10);
+		DR.setFitWidth(10);
+		DarkRed.setGraphic(DR);
+		//DarkGreen
+		ImageView DG =new ImageView (new Image((new File("assets" + File.separator + "gd.png")).toURI().toString()));
+		DG.setFitHeight(10);
+		DG.setFitWidth(10);
+		DarkGreen.setGraphic(DG);
+		//HotPink
+		ImageView hp =new ImageView (new Image((new File("assets" + File.separator + "hotpink.png")).toURI().toString()));
+		hp.setFitHeight(10);
+		hp.setFitWidth(10);
+		HotPink.setGraphic(hp);
+		//Pink
+		ImageView p =new ImageView (new Image((new File("assets" + File.separator + "pink.png")).toURI().toString()));
+		p.setFitHeight(10);
+		p.setFitWidth(10);
+		Pink.setGraphic(p);
+		//Purple
+		ImageView pp =new ImageView (new Image((new File("assets" + File.separator + "purple.png")).toURI().toString()));
+		pp.setFitHeight(10);
+		pp.setFitWidth(10);
+		Purple.setGraphic(pp);
+		//SteelBlue
+		ImageView sb =new ImageView (new Image((new File("assets" + File.separator + "sb.png")).toURI().toString()));
+		sb.setFitHeight(10);
+		sb.setFitWidth(10);
+		SteelBlue.setGraphic(sb);
+		//Gold
+		ImageView gold =new ImageView (new Image((new File("assets" + File.separator + "gold.png")).toURI().toString()));
+		gold.setFitHeight(10);
+		gold.setFitWidth(10);
+		Gold.setGraphic(gold);
+		//Silver
+		ImageView silver =new ImageView (new Image((new File("assets" + File.separator + "silver.png")).toURI().toString()));
+		silver.setFitHeight(10);
+		silver.setFitWidth(10);
+		Silver.setGraphic(silver);
+		//Red
+		ImageView rd =new ImageView (new Image((new File("assets" + File.separator + "red.png")).toURI().toString()));
+		rd.setFitHeight(10);
+		rd.setFitWidth(10);
+		Red.setGraphic(rd);
+		//Blue
+		ImageView ble =new ImageView (new Image((new File("assets" + File.separator + "blue.png")).toURI().toString()));
+		ble.setFitHeight(10);
+		ble.setFitWidth(10);
+		Blue.setGraphic(ble);
+		//Green
+		ImageView gr =new ImageView (new Image((new File("assets" + File.separator + "green.png")).toURI().toString()));
+		gr.setFitHeight(10);
+		gr.setFitWidth(10);
+		Green.setGraphic(gr);
+		//Yellow
+		ImageView y =new ImageView (new Image((new File("assets" + File.separator + "yellow.png")).toURI().toString()));
+		y.setFitHeight(10);
+		y.setFitWidth(10);
+		Yellow.setGraphic(y);
+		//Orange
+		ImageView or =new ImageView (new Image((new File("assets" + File.separator + "orange.png")).toURI().toString()));
+		or.setFitHeight(10);
+		or.setFitWidth(10);
+		Orange.setGraphic(or);
+		//Brown
+		ImageView br =new ImageView (new Image((new File("assets" + File.separator + "brown.png")).toURI().toString()));
+		br.setFitHeight(10);
+		br.setFitWidth(10);
+		Brown.setGraphic(br);
+		//Grey
+		ImageView gy =new ImageView (new Image((new File("assets" + File.separator + "grey.png")).toURI().toString()));
+		gy.setFitHeight(10);
+		gy.setFitWidth(10);
+		Grey.setGraphic(gy);
+
+		
 		
 		//Cursor Options
 		MenuItem cursor1 = new MenuItem("EXID Lightstick");
@@ -167,8 +283,13 @@ public class NoteApplication extends Application {
 		box.getChildren().add(menuBar);
 		
 		//add the text area to the vbox
-		TextArea textArea = new TextArea();
 		textArea.setPrefSize(900,900);
+		
+		
+		//textArea.setStyle("-fx-font-size: 14");
+		
+
+
 		box.getChildren().add(textArea);
 	
 		//exit button
@@ -327,6 +448,8 @@ public class NoteApplication extends Application {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Tahoma", textArea.getFont().getSize());
 				textArea.setFont(font);
+				System.out.println(textArea.getFont().getSize());
+
 			}
 		});
 		verdana.setOnAction(new EventHandler<ActionEvent>() {
@@ -532,13 +655,186 @@ public class NoteApplication extends Application {
 			}
 			
 		});
+		//add the icons 
+				cursor1.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						Image image = new Image((new File("assets" + File.separator + "free.png")).toURI().toString()); //pass in the image path
+						scene.setCursor(new ImageCursor(image)); 
+					}
+					
+				});
+				cursor2.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						Image image1 = new Image((new File("assets" + File.separator + "ice.png")).toURI().toString()); //pass in the image path
+						scene.setCursor(new ImageCursor(image1));
+					}
+					
+				});
+				cursor3.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						Image image2 = new Image((new File("assets" + File.separator + "today.png")).toURI().toString()); //pass in the image path
+						scene.setCursor(new ImageCursor(image2));
+					}
+					
+				});
+				cursor4.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						Image image3 = new Image((new File("assets" + File.separator + "last.png")).toURI().toString()); //pass in the image path
+						scene.setCursor(new ImageCursor(image3));
+					}
+					
+				});
+				cursor5.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						Image image4 = new Image((new File("assets" + File.separator + "prev.png")).toURI().toString()); //pass in the image path
+						scene.setCursor(new ImageCursor(image4));
+					}
+					
+				});
+				
+				
+				//font size pop up 
+				menuI4.setOnAction(new SizeHandler(new PopSize()));
+				
+				
+				
+				
+		//change color of text 
+				//white
+				White.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:white");
+						
+					}
+				});		
+				//black
+				Black.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:black");
+						
+					}
+				});	
+				//dark red
+				DarkRed.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:darkred");
+						
+					}
+				});	
+				//dark blue
+				DarkBlue.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:darkblue");
+						
+					}
+				});	
+				//dark green
+				DarkGreen.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:darkgreen");
+						
+					}
+				});	
+				//hot pink
+				HotPink.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:hotpink");
+						
+					}
+				});	
+				//pink
+				Pink.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:pink");
+						
+					}
+				});	
+				//purple
+				Purple.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:purple");
+						
+					}
+				});	
+				//steel blue
+				SteelBlue.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:steelblue");
+						
+					}
+				});	
+				//gold
+				Gold.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:gold");
+						
+					}
+				});	
+				//silver
+				Silver.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:silver");
+						
+					}
+				});	
+				//red
+				Red.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:red");
+						
+					}
+				});	
+				//blue
+				Blue.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:blue");
+						
+					}
+				});	
+				//green
+				Green.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:green");
+						
+					}
+				});	
+				//yellow
+				Yellow.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:yellow");
+						
+					}
+				});	
+				//orange
+				Orange.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:orange");
+						
+					}
+				});	
+				//brown
+				Brown.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:brown");
+						
+					}
+				});	
+				//grey
+				Grey.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						textArea.setStyle("-fx-text-fill:grey");
+						
+					}
+				});	
 		
-		// setting the stage
+		// setting the stage   
 		stage.setScene(scene);
 		
 		// adding the logo 
 		Image a = new Image((new File("assets" + File.separator + "logoofNotepad.png")).toURI().toString());
 		stage.getIcons().add(a);
+		
+		
 		
 		//display the notepad to user
 		stage.show();
@@ -547,5 +843,29 @@ public class NoteApplication extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	@Override
+	// update the size of the font->if decrease/ increase
+	public void update(Observable o) {
+		if (o.getClass()==increaseHandler.class) {
+			increaseHandler increase = (increaseHandler)o;
+			Font curr= textArea.getFont();
+			Font newF = new Font(curr.getName(), increase.getFont());
+			textArea.setFont(newF);
+
+			//System.out.println(curr.getName());
+			
+			
+		}
+		else if (o.getClass()==decreaseHandler.class) {
+			decreaseHandler decrease = (decreaseHandler)o;
+			Font curr= textArea.getFont();
+			Font newF = new Font(curr.getName(), decrease.getFont());
+			textArea.setFont(newF);
+			
+		}
+	}
+
+	
 
 }
