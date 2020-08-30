@@ -24,7 +24,7 @@ public class PopSize {
 
 		stage.setScene(scene);
 		stage.setResizable(false);
-		stage.setTitle("#Note");
+		stage.setTitle("Alter Font Size");
 		
 		//title of box
 		 Label changeSize= new Label("	        Change Font Size");
