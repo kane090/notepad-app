@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -34,10 +35,30 @@ public class PopSize {
 		
 		//add buttons and label/ text area
 		HBox s= new HBox(5);
-		Button increase= new Button("inc");
-		Button decrease= new Button("dec");
+		Button increase= new Button();
+		Button decrease= new Button();
 		TextField currentSize= new TextField("12.0");
 		currentSize.setEditable(false);
+		
+		//add images to buttons 
+		Image up = new Image((new File("assets" + File.separator + "LogoMakr_860yq5.png")).toURI().toString());
+		Image down =  new Image((new File("assets" + File.separator + "LogoMakr_9Twd2T.png")).toURI().toString());
+		
+		//size them
+		ImageView upB=new ImageView(up);
+		ImageView downB=new ImageView(down);
+		upB.setFitHeight(20);
+		upB.setFitWidth(20);
+		downB.setFitHeight(20);
+		downB.setFitWidth(20);
+		
+		//set button graphics
+		increase.setGraphic(upB);
+		decrease.setGraphic(downB);
+		increase.setStyle("-fx-background-color: transparent");
+		decrease.setStyle("-fx-background-color: transparent");
+
+		
 		
 		//set  size
 		//increase.setPrefWidth(90);
