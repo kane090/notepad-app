@@ -18,5 +18,4 @@ public class Observable {
 			o.update(this);
 		}
 	}
-	
 }

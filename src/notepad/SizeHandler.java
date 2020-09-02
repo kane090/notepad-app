@@ -10,10 +10,7 @@ public class SizeHandler implements EventHandler<ActionEvent> {
 		this.size=popSize;
 	}
 
-	
-
 	public void handle(ActionEvent event) {
 		size.show();
 	}
-
 }

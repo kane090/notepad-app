@@ -33,8 +33,7 @@ public class NoteApplication extends Application implements Observer {
 	private boolean isRed = false;
 	private boolean isBlue = false;
 	private boolean isGreen = false;
-	public static TextArea textArea= new TextArea();
-
+	public static TextArea textArea = new TextArea();
 
 	public void start(Stage stage) throws Exception {
 		
@@ -54,11 +53,7 @@ public class NoteApplication extends Application implements Observer {
 		Menu menu3 = new Menu("Options");
 		
 		// add Menus to Menu bar
-		menuBar.getMenus().add(menu);
-		menuBar.getMenus().add(menu2);
-		menuBar.getMenus().add(menu1);
-		menuBar.getMenus().add(menu3);
-
+		menuBar.getMenus().addAll(menu, menu2, menu1, menu3);
 		
 		// add options to File menu
 		MenuItem menuItem1 = new MenuItem("New");
@@ -68,32 +63,22 @@ public class NoteApplication extends Application implements Observer {
 		MenuItem menuItem5 = new MenuItem("Redo");
 		MenuItem menuItem6 = new MenuItem("Exit");
 		
-		menu.getItems().add(menuItem1);
-		menu.getItems().add(menuItem2);
-		menu.getItems().add(menuItem3);
-		menu.getItems().add(menuItem4);
-		menu.getItems().add(menuItem5);
-		menu.getItems().add(menuItem6);
-		
+		menu.getItems().addAll(menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6);
+
 		// add options to edit menu
 		MenuItem menuItema = new MenuItem("Cut");
 		MenuItem menuItemb = new MenuItem("Copy");
 		MenuItem menuItemc = new MenuItem("Paste");
 		MenuItem menuItemd = new MenuItem("Select All");
 		
-		menu2.getItems().add(menuItema);
-		menu2.getItems().add(menuItemb);
-		menu2.getItems().add(menuItemc);
-		menu2.getItems().add(menuItemd);
+		menu2.getItems().addAll(menuItema, menuItemb, menuItemc, menuItemd);
 			
 		// add options to txt options
 		Menu menuI3 = new Menu("Font");
 		MenuItem menuI4 = new MenuItem("Size");
 		Menu menuI5 = new Menu("Colour");
 		
-		menu1.getItems().add(menuI3);
-		menu1.getItems().add(menuI4);
-		menu1.getItems().add(menuI5);
+		menu1.getItems().addAll(menuI3, menuI4, menuI5);
 	
 		
 		// add options to the options 
@@ -121,7 +106,7 @@ public class NoteApplication extends Application implements Observer {
 		MenuItem Brown= new MenuItem("Brown");
 		MenuItem Grey= new MenuItem("Grey");
 		
-		menuI5.getItems().addAll(White,Black,DarkRed,DarkBlue,DarkGreen,HotPink,Pink,Purple, SteelBlue,Gold,Silver,Red,Blue,Green,Yellow,Orange,Brown,Grey);
+		menuI5.getItems().addAll(White, Black, DarkRed, DarkBlue, DarkGreen, HotPink, Pink, Purple, SteelBlue, Gold, Silver, Red, Blue, Green, Yellow, Orange, Brown, Grey);
 		
 		//adding the color spoilers
 		//DarkBlue
@@ -212,18 +197,14 @@ public class NoteApplication extends Application implements Observer {
 
 		
 		
-		//Cursor Options
+		// Cursor Options
 		MenuItem cursor1 = new MenuItem("EXID Lightstick");
 		MenuItem cursor2 = new MenuItem("Ice Cream");
 		MenuItem cursor3 = new MenuItem("Dark Mouse");
 		MenuItem cursor4 = new MenuItem("Light Mouse");
 		MenuItem cursor5 = new MenuItem("Batman Logo");
 		
-		cursor.getItems().add(cursor1);
-		cursor.getItems().add(cursor2);
-		cursor.getItems().add(cursor3);
-		cursor.getItems().add(cursor4);
-		cursor.getItems().add(cursor5);
+		cursor.getItems().addAll(cursor1, cursor2, cursor3, cursor4, cursor5);
 		
 		
 		// color scheme options 
@@ -235,18 +216,10 @@ public class NoteApplication extends Application implements Observer {
 		MenuItem green = new MenuItem("Green Mode");
 		MenuItem blue = new MenuItem("Blue Mode");
 		MenuItem red = new MenuItem("Red Mode");
-		color.getItems().add(dark);
-		color.getItems().add(light);
-		color.getItems().add(pastelP);
-		color.getItems().add(pastelB);
-		color.getItems().add(pastelG);
-		color.getItems().add(green);
-		color.getItems().add(blue);
-		color.getItems().add(red);
+		
+		color.getItems().addAll(dark, light, pastelP, pastelB, pastelG, green, blue, red);
 
-		menu3.getItems().add(help);
-		menu3.getItems().add(color);
-		menu3.getItems().add(cursor);
+		menu3.getItems().addAll(help, color, cursor);
 		
 		// font options
 		MenuItem agencyfb = new MenuItem("Agency FB");
@@ -262,19 +235,8 @@ public class NoteApplication extends Application implements Observer {
 		MenuItem verdana = new MenuItem("Verdana");
 		MenuItem mvboli = new MenuItem("MV Boli");
 		MenuItem palatinolinotype = new MenuItem("Palatino Linotype");
-		menuI3.getItems().add(agencyfb);
-		menuI3.getItems().add(arial);
-		menuI3.getItems().add(bellmt);
-		menuI3.getItems().add(bookantiqua);
-		menuI3.getItems().add(comicsansms);
-		menuI3.getItems().add(franklingothicbook);
-		menuI3.getItems().add(hightowertext);
-		menuI3.getItems().add(gillsansmt);
-		menuI3.getItems().add(papyrus);
-		menuI3.getItems().add(tahoma);
-		menuI3.getItems().add(verdana);
-		menuI3.getItems().add(mvboli);
-		menuI3.getItems().add(palatinolinotype);
+		
+		menuI3.getItems().addAll(agencyfb, arial, bellmt, bookantiqua, comicsansms, franklingothicbook, hightowertext, gillsansmt, papyrus, tahoma, verdana, mvboli, palatinolinotype);
 		
 		//set up the help pop up window
 		help.setOnAction(new HelpHandler(new PopHelp()));
@@ -284,21 +246,18 @@ public class NoteApplication extends Application implements Observer {
 		
 		//add the text area to the vbox
 		textArea.setPrefSize(900,900);
-		
-		
-		//textArea.setStyle("-fx-font-size: 14");
-		
 
-
+		
 		box.getChildren().add(textArea);
 	
+		
 		//exit button
 		menuItem6.setOnAction(e -> Platform.exit());
 		
 		//new button 
 		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-			   textArea.setText(null);
+			   textArea.clear();
 			}
 		});
 		
@@ -307,7 +266,6 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				FileChooser fc = new FileChooser();
 				File file = fc.showOpenDialog(stage);
-				
 				if (file != null) {
 					System.out.println("Opening: " + file.getName() + "." + "\n");
 					BufferedReader bufferedReader = null;
@@ -316,6 +274,8 @@ public class NoteApplication extends Application implements Observer {
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
+					NoteFileParser parser = new NoteFileParser();
+					parser.parse(bufferedReader, textArea);
 				}
 			}
 		});
@@ -325,7 +285,6 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				FileChooser fc = new FileChooser();
 				File file = fc.showSaveDialog(stage);
-
 				if (file != null) {
 					System.out.println("Saving: " + file.getName() + "." + "\n");
 					PrintWriter writer = null;
@@ -340,7 +299,6 @@ public class NoteApplication extends Application implements Observer {
 				}
 			}
 		});
-		
 		
 		
 		//redo button
@@ -448,7 +406,6 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Tahoma", textArea.getFont().getSize());
 				textArea.setFont(font);
-				System.out.println(textArea.getFont().getSize());
 
 			}
 		});
@@ -478,8 +435,6 @@ public class NoteApplication extends Application implements Observer {
 		//primary colors 
 		red.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				//System.out.println(Font.getFamilies());
-
 				if (!isRed) {
 					textArea.setStyle("-fx-text-fill:darkred");
 					scene.getRoot().setStyle("-fx-base:red");
@@ -529,7 +484,6 @@ public class NoteApplication extends Application implements Observer {
 			}
 			
 		});
-		
 		
 		
 		//pastel modes
@@ -614,12 +568,12 @@ public class NoteApplication extends Application implements Observer {
 					isGreen=false;
 					isBlue=false;
 					isRed=false;
-					
 				}
 			}
 			
 		});
-		//add the icons 
+		
+		//add the cursor icons 
 		cursor1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Image image = new Image((new File("assets" + File.separator + "free.png")).toURI().toString()); //pass in the image path
@@ -653,180 +607,142 @@ public class NoteApplication extends Application implements Observer {
 				Image image4 = new Image((new File("assets" + File.separator + "prev.png")).toURI().toString()); //pass in the image path
 				scene.setCursor(new ImageCursor(image4));
 			}
-			
+
 		});
-		//add the icons 
-				cursor1.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						Image image = new Image((new File("assets" + File.separator + "free.png")).toURI().toString()); //pass in the image path
-						scene.setCursor(new ImageCursor(image)); 
-					}
-					
-				});
-				cursor2.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						Image image1 = new Image((new File("assets" + File.separator + "ice.png")).toURI().toString()); //pass in the image path
-						scene.setCursor(new ImageCursor(image1));
-					}
-					
-				});
-				cursor3.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						Image image2 = new Image((new File("assets" + File.separator + "today.png")).toURI().toString()); //pass in the image path
-						scene.setCursor(new ImageCursor(image2));
-					}
-					
-				});
-				cursor4.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						Image image3 = new Image((new File("assets" + File.separator + "last.png")).toURI().toString()); //pass in the image path
-						scene.setCursor(new ImageCursor(image3));
-					}
-					
-				});
-				cursor5.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						Image image4 = new Image((new File("assets" + File.separator + "prev.png")).toURI().toString()); //pass in the image path
-						scene.setCursor(new ImageCursor(image4));
-					}
-					
-				});
-				
-				
-				//font size pop up 
-				menuI4.setOnAction(new SizeHandler(new PopSize()));
-				
-				
-				
-				
-		//change color of text 
-				//white
-				White.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:white");
-						
-					}
-				});		
-				//black
-				Black.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:black");
-						
-					}
-				});	
-				//dark red
-				DarkRed.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:darkred");
-						
-					}
-				});	
-				//dark blue
-				DarkBlue.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:darkblue");
-						
-					}
-				});	
-				//dark green
-				DarkGreen.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:darkgreen");
-						
-					}
-				});	
-				//hot pink
-				HotPink.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:hotpink");
-						
-					}
-				});	
-				//pink
-				Pink.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:pink");
-						
-					}
-				});	
-				//purple
-				Purple.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:purple");
-						
-					}
-				});	
-				//steel blue
-				SteelBlue.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:steelblue");
-						
-					}
-				});	
-				//gold
-				Gold.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:gold");
-						
-					}
-				});	
-				//silver
-				Silver.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:silver");
-						
-					}
-				});	
-				//red
-				Red.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:red");
-						
-					}
-				});	
-				//blue
-				Blue.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:blue");
-						
-					}
-				});	
-				//green
-				Green.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:green");
-						
-					}
-				});	
-				//yellow
-				Yellow.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:yellow");
-						
-					}
-				});	
-				//orange
-				Orange.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:orange");
-						
-					}
-				});	
-				//brown
-				Brown.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:brown");
-						
-					}
-				});	
-				//grey
-				Grey.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-						textArea.setStyle("-fx-text-fill:grey");
-						
-					}
-				});	
 		
+		//font size pop up
+		PopSize popsize = new PopSize(textArea.getFont().getSize());
+		menuI4.setOnAction(new SizeHandler(popsize));
+
+		
+		//change color of text
+		//white
+		White.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:white");
+				
+			}
+		});		
+		//black
+		Black.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:black");
+				
+			}
+		});	
+		//dark red
+		DarkRed.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:darkred");
+				
+			}
+		});	
+		//dark blue
+		DarkBlue.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:darkblue");
+				
+			}
+		});	
+		//dark green
+		DarkGreen.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:darkgreen");
+				
+			}
+		});	
+		//hot pink
+		HotPink.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:hotpink");
+				
+			}
+		});	
+		//pink
+		Pink.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:pink");
+				
+			}
+		});	
+		//purple
+		Purple.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:purple");
+				
+			}
+		});	
+		//steel blue
+		SteelBlue.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:steelblue");
+				
+			}
+		});	
+		//gold
+		Gold.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:gold");
+				
+			}
+		});	
+		//silver
+		Silver.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:silver");
+				
+			}
+		});	
+		//red
+		Red.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:red");
+				
+			}
+		});	
+		//blue
+		Blue.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:blue");
+				
+			}
+		});	
+		//green
+		Green.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:green");
+				
+			}
+		});	
+		//yellow
+		Yellow.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:yellow");
+				
+			}
+		});	
+		//orange
+		Orange.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:orange");
+				
+			}
+		});	
+		//brown
+		Brown.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:brown");
+				
+			}
+		});	
+		//grey
+		Grey.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.setStyle("-fx-text-fill:grey");
+				
+			}
+		});	
+	
 		// setting the stage   
 		stage.setScene(scene);
 		
@@ -844,28 +760,19 @@ public class NoteApplication extends Application implements Observer {
 		launch(args);
 	}
 
-	@Override
-	// update the size of the font->if decrease/ increase
+	// update the size of the font -> if decrease/increase
 	public void update(Observable o) {
-		if (o.getClass()==increaseHandler.class) {
+		if (o.getClass() == increaseHandler.class) {
 			increaseHandler increase = (increaseHandler)o;
-			Font curr= textArea.getFont();
+			Font curr = textArea.getFont();
 			Font newF = new Font(curr.getName(), increase.getFont());
-			textArea.setFont(newF);
-
-			//System.out.println(curr.getName());
-			
-			
+			textArea.setFont(newF);	
 		}
-		else if (o.getClass()==decreaseHandler.class) {
+		if (o.getClass() == decreaseHandler.class) {
 			decreaseHandler decrease = (decreaseHandler)o;
-			Font curr= textArea.getFont();
+			Font curr = textArea.getFont();
 			Font newF = new Font(curr.getName(), decrease.getFont());
 			textArea.setFont(newF);
-			
 		}
 	}
-
-	
-
 }

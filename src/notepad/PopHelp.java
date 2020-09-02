@@ -12,13 +12,14 @@ import javafx.stage.Stage;
 
 public class PopHelp {
 	private Stage stage;
-	PopHelp() {
+	
+	public PopHelp() {
 		this.stage = new Stage(); //new stage
 		VBox Help = new VBox();
 		Scene scene = new Scene(Help,500,125);
 		stage.setResizable(false);
 		stage.setTitle("Help");
-		//txtoptionsq
+		//txt options
 		 Label changeSize= new Label("	                     What Are Text Options?");
 		 changeSize.setFont( Font.font("Verdana", FontWeight.BOLD,15));
 		 changeSize.setPrefSize(500, 30);
@@ -26,19 +27,19 @@ public class PopHelp {
 		 
 		 
 		 //TEXT OPTIONS
-		 Label tO= new Label(" Text Options offer a variety of ways to customize how  you want to format your \n text. There are 13 unique fonts and 18 font colors to choose from!");
+		 Label tO= new Label(" Text Options offer a variety of ways to customize how you want to format your \n text. There are 13 unique fonts and 18 font colors to choose from!");
 		 tO.setFont( Font.font("Verdana", FontWeight.NORMAL,12));
 		 changeSize.setPrefSize(500, 30);
 		 Help.getChildren().add(tO);
 		 
-		 //optionsq
+		 //options
 		 Label op= new Label("	                          What Are Options?");
 		 op.setFont( Font.font("Verdana", FontWeight.BOLD,15));
 		 op.setPrefSize(500, 30);
 		 Help.getChildren().add(op);
 		 
 		 //options 
-		 Label opti= new Label(" Options allows the user to choose from 8 colour schemes and  5 unique cursors.");
+		 Label opti= new Label(" Options allows the user to choose from 8 colour schemes and 5 unique cursors.");
 		 opti.setFont( Font.font("Verdana", FontWeight.NORMAL,12));
 		 opti.setPrefSize(500, 30);
 		 Help.getChildren().add(opti);
