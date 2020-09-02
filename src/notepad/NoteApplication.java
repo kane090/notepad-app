@@ -577,7 +577,9 @@ public class NoteApplication extends Application implements Observer {
 		cursor1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Image image = new Image((new File("assets" + File.separator + "free.png")).toURI().toString()); //pass in the image path
-				scene.setCursor(new ImageCursor(image)); 
+				scene.setCursor(new ImageCursor(image));
+				textArea.setId("TA");
+				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image)); //setting cursor throughout TextArea
 			}
 			
 		});
@@ -585,6 +587,8 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				Image image1 = new Image((new File("assets" + File.separator + "ice.png")).toURI().toString()); //pass in the image path
 				scene.setCursor(new ImageCursor(image1));
+				textArea.setId("TA");
+				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image1)); //setting cursor throughout TextArea
 			}
 			
 		});
@@ -592,6 +596,8 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				Image image2 = new Image((new File("assets" + File.separator + "today.png")).toURI().toString()); //pass in the image path
 				scene.setCursor(new ImageCursor(image2));
+				textArea.setId("TA");
+				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image2)); //setting cursor throughout TextArea
 			}
 			
 		});
@@ -599,6 +605,8 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				Image image3 = new Image((new File("assets" + File.separator + "last.png")).toURI().toString()); //pass in the image path
 				scene.setCursor(new ImageCursor(image3));
+				textArea.setId("TA");
+				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image3)); //setting cursor throughout TextArea
 			}
 			
 		});
@@ -606,6 +614,8 @@ public class NoteApplication extends Application implements Observer {
 			public void handle(ActionEvent event) {
 				Image image4 = new Image((new File("assets" + File.separator + "prev.png")).toURI().toString()); //pass in the image path
 				scene.setCursor(new ImageCursor(image4));
+				textArea.setId("TA");
+				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image4)); //setting cursor throughout TextArea
 			}
 
 		});
@@ -749,8 +759,6 @@ public class NoteApplication extends Application implements Observer {
 		// adding the logo 
 		Image a = new Image((new File("assets" + File.separator + "logoofNotepad.png")).toURI().toString());
 		stage.getIcons().add(a);
-		
-		
 		
 		//display the notepad to user
 		stage.show();
