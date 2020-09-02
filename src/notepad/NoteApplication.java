@@ -1,12 +1,11 @@
 package notepad;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
-import ObserverObservable.Observable;
-import ObserverObservable.Observer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -24,7 +23,7 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class NoteApplication extends Application implements Observer {
+public class NoteApplication extends Application {
 	private boolean isDark = false;
 	private boolean isLight = false;
 	private boolean isPastelPink = false;
@@ -33,7 +32,7 @@ public class NoteApplication extends Application implements Observer {
 	private boolean isRed = false;
 	private boolean isBlue = false;
 	private boolean isGreen = false;
-	public static TextArea textArea = new TextArea();
+	public TextArea textArea = new TextArea();
 
 	public void start(Stage stage) throws Exception {
 		
@@ -621,8 +620,7 @@ public class NoteApplication extends Application implements Observer {
 		});
 		
 		//font size pop up
-		PopSize popsize = new PopSize(textArea.getFont().getSize());
-		menuI4.setOnAction(new SizeHandler(popsize));
+		menuI4.setOnAction(new SizeHandler(new PopSize(textArea)));
 
 		
 		//change color of text
@@ -766,21 +764,5 @@ public class NoteApplication extends Application implements Observer {
 
 	public static void main(String[] args) {
 		launch(args);
-	}
-
-	// update the size of the font -> if decrease/increase
-	public void update(Observable o) {
-		if (o.getClass() == increaseHandler.class) {
-			increaseHandler increase = (increaseHandler)o;
-			Font curr = textArea.getFont();
-			Font newF = new Font(curr.getName(), increase.getFont());
-			textArea.setFont(newF);	
-		}
-		if (o.getClass() == decreaseHandler.class) {
-			decreaseHandler decrease = (decreaseHandler)o;
-			Font curr = textArea.getFont();
-			Font newF = new Font(curr.getName(), decrease.getFont());
-			textArea.setFont(newF);
-		}
 	}
 }
