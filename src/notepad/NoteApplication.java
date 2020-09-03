@@ -36,16 +36,16 @@ public class NoteApplication extends Application {
 
 	public void start(Stage stage) throws Exception {
 		
-		// name and logo set up of notepad
+		// name of notepad app
 		stage.setTitle("#Note");
 		
 		// setting up the main scene
 		VBox box = new VBox();
 		
-		// menu creation
+		// menubar creation
 		MenuBar menuBar = new MenuBar();
 		
-		// menu-> menu item 
+		// menubar menus 
 		Menu menu = new Menu("File");
 		Menu menu2 = new Menu("Edit");
 		Menu menu1 = new Menu("Text Options");
@@ -72,7 +72,7 @@ public class NoteApplication extends Application {
 		
 		menu2.getItems().addAll(menuItema, menuItemb, menuItemc, menuItemd);
 			
-		// add options to txt options
+		// add options to text options
 		Menu menuI3 = new Menu("Font");
 		MenuItem menuI4 = new MenuItem("Size");
 		Menu menuI5 = new Menu("Colour");
@@ -85,7 +85,7 @@ public class NoteApplication extends Application {
 		Menu cursor = new Menu("Change Cursor");
 		MenuItem help = new MenuItem("Help");
 		
-		//text color options 
+		// adding color options to color submenu
 		MenuItem White= new MenuItem("White");
 		MenuItem Black= new MenuItem("Black");
 		MenuItem DarkRed= new MenuItem("Dark Red");
@@ -107,7 +107,7 @@ public class NoteApplication extends Application {
 		
 		menuI5.getItems().addAll(White, Black, DarkRed, DarkBlue, DarkGreen, HotPink, Pink, Purple, SteelBlue, Gold, Silver, Red, Blue, Green, Yellow, Orange, Brown, Grey);
 		
-		//adding the color spoilers
+		// adding the color spoilers
 		//DarkBlue
 		ImageView DB =new ImageView (new Image((new File("assets" + File.separator + "darkblue.png")).toURI().toString()));
 		DB.setFitHeight(10);
@@ -246,7 +246,8 @@ public class NoteApplication extends Application {
 		
 		//add the text area to the vbox
 		textArea.setPrefSize(900,900);
-
+		
+		//adding textarea to GUI
 		box.getChildren().add(textArea);
 		
 		//setting up size changing pop-up
@@ -466,7 +467,6 @@ public class NoteApplication extends Application {
 		});
 		
 		//setting up color scheme buttons
-		
 		//primary colors 
 		red.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -520,7 +520,7 @@ public class NoteApplication extends Application {
 		});
 		
 		
-		//pastel modes
+		//pastel colors
 		pastelP.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isPastelPink) {

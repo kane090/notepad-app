@@ -17,9 +17,9 @@ public class EnterEventHandler implements EventHandler<ActionEvent> {
 
 	public void handle(ActionEvent event) {
         try {
-        	double size = Double.parseDouble(this.tf.getText());
+        	double size = Double.parseDouble(this.tf.getText()); // getting size entered into textfield
             if (size >= 1.0 && size <= 60.0) {
-            	Font font = new Font(ta.getFont().getFamily(), size);
+            	Font font = new Font(ta.getFont().getFamily(), size); // creating font object to help change size
             	ta.setFont(font);
             }
             else {
