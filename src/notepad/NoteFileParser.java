@@ -8,22 +8,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 
 public class NoteFileParser {
-	private TextArea textArea;
-	private String ans = "";
-	static NoteApplication noteApplication = new NoteApplication();
-
 	private Pattern pFileStart = Pattern.compile("^NoteSaveFileVersion1.0$");
 	private Pattern pFileEnd = Pattern.compile("^EndNoteSaveFile$");
 	
-	private Pattern pFontandSize = Pattern.compile("\tFont and Size: (System|Agency FB|Arial|Bell MT|Book Antiqua|Comic Sans MS|Franklin Gothic Book|High Tower Text|Gill Sans MT|Papyrus|Tahoma|Verdana|MV Boli|Palatino Linotype) ([1-9]|[1-5][0-9]|60)\\.0");
+	private Pattern pFontandSize = Pattern.compile("\tFont and Size: (System|Agency FB|Arial|Bell MT|Book Antiqua|Comic Sans MS|Franklin Gothic Book|High Tower Text|Gill Sans MT|Papyrus|Tahoma|Verdana|MV Boli|Palatino Linotype) ([1-9]\\.[0-9]|[1-5][0-9]\\.[0-9]|60\\.0)");
 
-	private Pattern pColor = Pattern.compile("\tColor: (|(-fx-text-fill:(white|darkred|darkblue|darkgreen|hotpink|pink|purple|steelblue|gold|silver|red|blue|green|yellow|orange|brown|grey|black)))");
+	private Pattern pColor = Pattern.compile("\tColor: (|(-fx-text-fill:(white|darkred|darkblue|darkgreen|hotpink|pink|purple|steelblue|gold|silver|red|blue|green|yellow|orange|brown|grey)))");
 	
 	private Pattern pText = Pattern.compile("\tText:");
 	private Pattern pEndText = Pattern.compile("^EndText$");
 
-	public boolean parse(BufferedReader inputStream, TextArea textArea) {
-		this.textArea = textArea;
+	public boolean parse(BufferedReader inputStream, TextArea textArea, PopSize popSize) {
+		String ans = "";
 		Font font = null;
 		
 		try {	
@@ -43,8 +39,9 @@ public class NoteFileParser {
 						m=pFontandSize.matcher(l);
 						if(m.matches()) {
 							state = 2;
-							font = new Font(m.group(1), Integer.parseInt(m.group(2)));
-							this.textArea.setFont(font);
+							font = new Font(m.group(1), Double.parseDouble(m.group(2)));
+							textArea.setFont(font);
+							popSize.updateText(m.group(2));
 							break;
 						}
 						System.out.println("Expected Font and Size");
@@ -54,7 +51,7 @@ public class NoteFileParser {
 						if(m.matches()) {
 							state = 3;
 							if (m.group(2) != "") {
-								this.textArea.setStyle(m.group(2));
+								textArea.setStyle(m.group(2));
 							}
 							break;
 						}
@@ -81,14 +78,14 @@ public class NoteFileParser {
 						m=pFileEnd.matcher(l);
 						if(m.matches()) {
 							state = 6;
-							this.textArea.setText(ans);
+							textArea.setText(ans);
 							break;
 						}
 						System.out.println("Expected End of Note Save File");
 						return false;
 					case 6:
 						if (l != null) {
-							this.textArea.clear();
+							textArea.clear();
 							System.out.println("Did not expect more content");
 							return false;
 						}

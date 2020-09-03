@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 public class PopSize {
 	private Stage stage;
+	private TextField tf;
 	
 	public PopSize(TextArea textArea) {
 		this.stage = new Stage(); //new stage
@@ -38,7 +39,7 @@ public class PopSize {
 		//add buttons and label/text area
 		HBox s = new HBox(5);
 		Button enter = new Button("Enter");
-		TextField tf = new TextField();
+		tf = new TextField(String.valueOf(textArea.getFont().getSize()));
 	
 		//set size
 		tf.setPrefColumnCount(3);
@@ -57,6 +58,10 @@ public class PopSize {
 		Image a = new Image((new File("assets" + File.separator + "logoofNotepad.png")).toURI().toString());
 		stage.getIcons().add(a);
 	}
+	
+	public void updateText(String number) {
+		tf.setText(number);
+	}
 
 	public void show() {
 		stage.show();
@@ -65,5 +70,4 @@ public class PopSize {
 	public void close() {
 		stage.close();
 	}
-
 }

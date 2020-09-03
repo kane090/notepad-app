@@ -226,6 +226,7 @@ public class NoteApplication extends Application {
 		MenuItem bellmt = new MenuItem("Bell MT");
 		MenuItem bookantiqua = new MenuItem("Book Antiqua");
 		MenuItem comicsansms = new MenuItem("Comic Sans MS");
+		MenuItem def = new MenuItem("Default");
 		MenuItem franklingothicbook = new MenuItem("Franklin Gothic Book");
 		MenuItem hightowertext = new MenuItem("High Tower Text");
 		MenuItem gillsansmt = new MenuItem("Gill Sans MT");
@@ -235,7 +236,7 @@ public class NoteApplication extends Application {
 		MenuItem mvboli = new MenuItem("MV Boli");
 		MenuItem palatinolinotype = new MenuItem("Palatino Linotype");
 		
-		menuI3.getItems().addAll(agencyfb, arial, bellmt, bookantiqua, comicsansms, franklingothicbook, hightowertext, gillsansmt, papyrus, tahoma, verdana, mvboli, palatinolinotype);
+		menuI3.getItems().addAll(agencyfb, arial, bellmt, bookantiqua, comicsansms, def, franklingothicbook, hightowertext, gillsansmt, papyrus, tahoma, verdana, mvboli, palatinolinotype);
 		
 		//set up the help pop up window
 		help.setOnAction(new HelpHandler(new PopHelp()));
@@ -246,20 +247,15 @@ public class NoteApplication extends Application {
 		//add the text area to the vbox
 		textArea.setPrefSize(900,900);
 
-		
 		box.getChildren().add(textArea);
-	
+		
+		//setting up size changing pop-up
+		PopSize popSize = new PopSize(textArea);
+		menuI4.setOnAction(new SizeHandler(popSize));
 		
 		//exit button
 		menuItem6.setOnAction(e -> Platform.exit());
-		
-		//new button 
-		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-			   textArea.clear();
-			}
-		});
-		
+				
 		//open button
 		menuItem2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -274,7 +270,7 @@ public class NoteApplication extends Application {
 						e.printStackTrace();
 					}
 					NoteFileParser parser = new NoteFileParser();
-					parser.parse(bufferedReader, textArea);
+					parser.parse(bufferedReader, textArea, popSize);
 				}
 			}
 		});
@@ -307,15 +303,12 @@ public class NoteApplication extends Application {
 			}
 		});
 		
-		
-		
 		//undo button
 		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 			   textArea.undo();
 			}
 		});
-		
 		
 		//cut button 
 		menuItema.setOnAction(new EventHandler<ActionEvent>() {
@@ -346,6 +339,7 @@ public class NoteApplication extends Application {
 			}
 		});
 		
+		
 		// font buttons
 		agencyfb.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -353,54 +347,71 @@ public class NoteApplication extends Application {
 				textArea.setFont(font);
 			}
 		});
+		
 		arial.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Arial", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		bellmt.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Bell MT", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		bookantiqua.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Book Antiqua", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		comicsansms.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Comic Sans MS", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
+		def.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				Font font = new Font("System", textArea.getFont().getSize());
+				textArea.setFont(font);
+
+			}
+		});
+		
 		franklingothicbook.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Franklin Gothic Book", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		hightowertext.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("High Tower Text", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		gillsansmt.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Gill Sans MT", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		papyrus.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Papyrus", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		tahoma.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Tahoma", textArea.getFont().getSize());
@@ -408,18 +419,21 @@ public class NoteApplication extends Application {
 
 			}
 		});
+		
 		verdana.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Verdana", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		mvboli.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("MV Boli", textArea.getFont().getSize());
 				textArea.setFont(font);
 			}
 		});
+		
 		palatinolinotype.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Font font = new Font("Palatino Linotype", textArea.getFont().getSize());
@@ -428,6 +442,28 @@ public class NoteApplication extends Application {
 		});
 		
 		Scene scene = new Scene(box,750,500);
+		
+		//new button 
+		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				textArea.clear();
+				Font font = new Font("System", 12.0);
+				textArea.setFont(font);
+				textArea.setStyle("");
+				scene.getRoot().setStyle("");
+				if (!isLight) {
+					isPastelPink = false;
+					isPastelBlue = false;
+					isPastelGreen= false;
+					isDark=false;
+					isLight=true;
+					isGreen=false;
+					isBlue=false;
+					isRed=false;
+				}
+				popSize.updateText("12.0");
+			}
+		});
 		
 		//setting up color scheme buttons
 		
@@ -447,8 +483,8 @@ public class NoteApplication extends Application {
 					isRed=true;
 				}
 			}
-			
 		});
+		
 		blue.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isBlue) {
@@ -464,8 +500,8 @@ public class NoteApplication extends Application {
 					isRed=false;
 				}
 			}
-			
 		});
+		
 		green.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isGreen) {
@@ -481,7 +517,6 @@ public class NoteApplication extends Application {
 					isRed=false;
 				}
 			}
-			
 		});
 		
 		
@@ -501,8 +536,8 @@ public class NoteApplication extends Application {
 					isRed=false;
 				}
 			}
-			
 		});
+		
 		pastelB.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isPastelBlue) {
@@ -518,8 +553,8 @@ public class NoteApplication extends Application {
 					isRed=false;
 				}
 			}
-			
 		});
+		
 		pastelG.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isPastelGreen) {
@@ -535,7 +570,6 @@ public class NoteApplication extends Application {
 					isRed=false;
 				}
 			}
-			
 		});
 		
 		
@@ -547,21 +581,24 @@ public class NoteApplication extends Application {
 					scene.getRoot().setStyle("-fx-base:black");
 					isDark = true;
 					isLight=false;
+					isPastelBlue = false;
+					isPastelGreen= false;
 					isPastelPink = false;
 					isGreen=false;
 					isBlue=false;
 					isRed=false;
 				}
 			}
-			
 		});
 		
 		light.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				if (!isLight) {
-					textArea.setStyle("-fx-text-fill:black");
-					scene.getRoot().setStyle("-fx-base:white");
+					textArea.setStyle("");
+					scene.getRoot().setStyle("");
 					isDark = false;
+					isPastelBlue = false;
+					isPastelGreen= false;
 					isPastelPink=false;
 					isLight=true;
 					isGreen=false;
@@ -569,8 +606,8 @@ public class NoteApplication extends Application {
 					isRed=false;
 				}
 			}
-			
 		});
+		
 		
 		//add the cursor icons 
 		cursor1.setOnAction(new EventHandler<ActionEvent>() {
@@ -580,8 +617,8 @@ public class NoteApplication extends Application {
 				textArea.setId("TA");
 				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image)); //setting cursor throughout TextArea
 			}
-			
 		});
+		
 		cursor2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Image image1 = new Image((new File("assets" + File.separator + "ice.png")).toURI().toString()); //pass in the image path
@@ -589,8 +626,8 @@ public class NoteApplication extends Application {
 				textArea.setId("TA");
 				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image1)); //setting cursor throughout TextArea
 			}
-			
 		});
+		
 		cursor3.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Image image2 = new Image((new File("assets" + File.separator + "today.png")).toURI().toString()); //pass in the image path
@@ -598,8 +635,8 @@ public class NoteApplication extends Application {
 				textArea.setId("TA");
 				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image2)); //setting cursor throughout TextArea
 			}
-			
 		});
+		
 		cursor4.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Image image3 = new Image((new File("assets" + File.separator + "last.png")).toURI().toString()); //pass in the image path
@@ -607,8 +644,8 @@ public class NoteApplication extends Application {
 				textArea.setId("TA");
 				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image3)); //setting cursor throughout TextArea
 			}
-			
 		});
+		
 		cursor5.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				Image image4 = new Image((new File("assets" + File.separator + "prev.png")).toURI().toString()); //pass in the image path
@@ -616,138 +653,133 @@ public class NoteApplication extends Application {
 				textArea.setId("TA");
 				textArea.getScene().lookup("#TA .content").setCursor(new ImageCursor(image4)); //setting cursor throughout TextArea
 			}
-
 		});
 		
-		//font size pop up
-		menuI4.setOnAction(new SizeHandler(new PopSize(textArea)));
-
 		
 		//change color of text
 		//white
 		White.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:white");
-				
 			}
-		});		
+		});	
+		
 		//black
 		Black.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				textArea.setStyle("-fx-text-fill:black");
-				
+				textArea.setStyle("");
 			}
 		});	
+		
 		//dark red
 		DarkRed.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:darkred");
-				
 			}
 		});	
+		
 		//dark blue
 		DarkBlue.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:darkblue");
-				
 			}
 		});	
+		
 		//dark green
 		DarkGreen.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:darkgreen");
-				
 			}
 		});	
+		
 		//hot pink
 		HotPink.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:hotpink");
-				
 			}
 		});	
+		
 		//pink
 		Pink.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:pink");
-				
 			}
 		});	
+		
 		//purple
 		Purple.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:purple");
-				
 			}
 		});	
+		
 		//steel blue
 		SteelBlue.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:steelblue");
-				
 			}
 		});	
+		
 		//gold
 		Gold.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:gold");
-				
 			}
 		});	
+		
 		//silver
 		Silver.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:silver");
-				
 			}
 		});	
+		
 		//red
 		Red.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				textArea.setStyle("-fx-text-fill:red");
-				
+				textArea.setStyle("-fx-text-fill:red");	
 			}
 		});	
+		
 		//blue
 		Blue.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:blue");
-				
 			}
 		});	
+		
 		//green
 		Green.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:green");
-				
 			}
 		});	
+		
 		//yellow
 		Yellow.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				textArea.setStyle("-fx-text-fill:yellow");
-				
+				textArea.setStyle("-fx-text-fill:yellow");	
 			}
 		});	
+		
 		//orange
 		Orange.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				textArea.setStyle("-fx-text-fill:orange");
-				
+				textArea.setStyle("-fx-text-fill:orange");	
 			}
 		});	
+		
 		//brown
 		Brown.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:brown");
-				
 			}
 		});	
+		
 		//grey
 		Grey.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				textArea.setStyle("-fx-text-fill:grey");
-				
 			}
 		});	
 	
